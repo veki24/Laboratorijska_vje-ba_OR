@@ -5,7 +5,7 @@
 Skup podataka sadrži informacije o nogometnim klubovima i igračima koji se natječu u Supersport Prvoj NL. Podaci su strukturirani u dvije povezane tablice: klubovi i igrači.
 
 ## Metapodaci
-- **Licencija**: Creative Commons 1.0
+- **Licencija**: Creative Commons Zero v1.0 Universal
 - **Autor**: Vedran Marković
 - **Verzija skupa podataka**: 1.0
 - **Jezik podataka**: Hrvatski
