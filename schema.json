@@ -1,0 +1,108 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://example.com/klub-igrac-schema.json",
+    "title": "Podaci o klubovima i igračima",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "klub_id": {
+                "type": "integer",
+                "description": "Jedinstveni identifikator kluba"
+            },
+            "ime_kluba": {
+                "type": "string",
+                "description": "Ime kluba"
+            },
+            "grad": {
+                "type": "string",
+                "description": "Grad gdje se klub nalazi"
+            },
+            "osnovan": {
+                "type": "integer",
+                "description": "Godina osnivanja kluba"
+            },
+            "stadion": {
+                "type": "string",
+                "description": "Naziv stadiona kluba"
+            },
+            "kapacitet_stadiona": {
+                "type": "integer",
+                "description": "Kapacitet stadiona"
+            },
+            "liga": {
+                "type": "string",
+                "description": "Liga u kojoj klub igra"
+            },
+            "drzava": {
+                "type": "string",
+                "description": "Država kluba"
+            },
+            "broj_osvojenih_titula": {
+                "type": "integer",
+                "description": "Broj osvojenih titula kluba"
+            },
+            "trener": {
+                "type": "string",
+                "description": "Trener kluba"
+            },
+            "igrac_id": {
+                "type": "integer",
+                "description": "Jedinstveni identifikator igrača"
+            },
+            "ime_igraca": {
+                "type": "string",
+                "description": "Ime igrača"
+            },
+            "pozicija": {
+                "type": "string",
+                "description": "Pozicija igrača"
+            },
+            "broj_dresa": {
+                "type": "integer",
+                "description": "Broj dresa igrača"
+            },
+            "godine": {
+                "type": "integer",
+                "description": "Godine igrača"
+            },
+            "nacionalnost": {
+                "type": "string",
+                "description": "Nacionalnost igrača"
+            },
+            "broj_golova": {
+                "type": "integer",
+                "description": "Broj postignutih golova igrača"
+            },
+            "broj_asistencija": {
+                "type": "integer",
+                "description": "Broj asistencija igrača"
+            },
+            "godine_u_klubu": {
+                "type": "integer",
+                "description": "Broj godina koje je igrač proveo u klubu"
+            }
+        },
+        "required": [
+            "klub_id",
+            "ime_kluba",
+            "grad",
+            "osnovan",
+            "stadion",
+            "kapacitet_stadiona",
+            "liga",
+            "drzava",
+            "broj_osvojenih_titula",
+            "trener",
+            "igrac_id",
+            "ime_igraca",
+            "pozicija",
+            "broj_dresa",
+            "godine",
+            "nacionalnost",
+            "broj_golova",
+            "broj_asistencija",
+            "godine_u_klubu"
+        ]
+    }
+}
