@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podaci: Klub i igrači</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Prikaz podataka: Klub i igrači</h1>
+
+    <!-- Forma za filtriranje podataka -->
+    <form id="filterForm">
+        <input type="text" id="searchInput" placeholder="Unesite pojam za pretragu">
+        <select id="searchAttribute">
+            <option value="ime_kluba">Naziv kluba</option>
+            <option value="grad">Grad</option>
+            <option value="ime_igraca">Ime igrača</option>
+            <option value="pozicija">Pozicija</option>
+            <option value="nacionalnost">Nacionalnost</option>
+            <!-- Dodajte ostale opcije po potrebi -->
+        </select>
+        <button type="submit">Pretraži</button>
+    </form>
+
+    <!-- HTML tablica za prikaz podataka -->
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Naziv kluba</th>
+                <th>Grad</th>
+                <th>Osnovan</th>
+                <th>Stadion</th>
+                <th>Kapacitet stadiona</th>
+                <th>Liga</th>
+                <th>Trener</th>
+                <th>Ime igrača</th>
+                <th>Pozicija</th>
+                <th>Broj dresa</th>
+                <th>Godine</th>
+                <th>Nacionalnost</th>
+                <th>Broj golova</th>
+                <th>Broj asistencija</th>
+                <th>Godine u klubu</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Redovi tablice će se dinamički dodavati iz JavaScript-a -->
+        </tbody>
+    </table>
+
+    <!-- Linkovi za preuzimanje filtriranih podataka -->
+    <a id="downloadCsv" href="#">Preuzmi filtrirane podatke (CSV)</a>
+    <a id="downloadJson" href="#">Preuzmi filtrirane podatke (JSON)</a>
+</body>
+</html>

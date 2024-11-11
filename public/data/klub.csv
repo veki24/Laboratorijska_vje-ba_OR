@@ -1,0 +1,13 @@
+klub_id,ime_kluba,grad,osnovan,stadion,kapacitet_stadiona,liga,drzava,broj_osvojenih_titula,trener,igrac_id,klub_id,ime_igraca,pozicija,broj_dresa,godine,nacionalnost,broj_golova,broj_asistencija,godine_u_klubu
+7,NK Jarun,Zagreb,1921,Stadion NK Jarun,1500,Supersport Prva NL,Hrvatska,0,Jerko Leko,1,7,Karlo Abramović,Napadač,17,24,Hrvatska,11,0,3
+9,HNK Cibalia,Vinkovci,1919,Stadion HNK Cibalia,10500,Supersport Prva NL,Hrvatska,1,Ivvan Karaula,2,9,Jurica Bajić,Napadač,13,24,Hrvatska,9,2,4
+1,HNK Vukovar 1991,Vukovar,1991,Stadion Borovo,6000,Supersport Prva NL,Hrvatska,0,Branko Karačić,3,1,Mateo Andacic,Napadač,15,26,Njemačka,4,0,3
+5,NK Sesvete,Sesvete,1945,Stadion Sv. Josip Radnik,3000,Supersport Prva NL,Hrvatska,1,Mario Rac,4,5,Ivor Ljubanović,Napadač,9,25,Hrvatska,12,3,2
+3,NK Dubrava Tim Kabel,Zagreb,1948,Stadion ŠRC Grana-Klaka,2000,Supersport Prva NL,Hrvatska,0,Davor Mladina,5,3,Tin Sarkaj,Golman,1,22,Hrvatska,0,0,3
+2,NK Opatija,Opatija,1908,Stadion Kantrida,10600,Supersport Prva NL,Hrvatska,0,Zoran Bogolin,6,2,Luka Marić,Obrambeni,21,37,Hrvatska,5,1,1
+4,NK Croatia Zmijavci,Zmijavci,1974,Stadion ŠRC Marijan šuto Mrma,1500,Supersport Prva NL,Hrvatska,0,Marko Kartelo,7,4,Tomislav Arković,Obrambeni,4,19,Hrvatska,0,0,1
+6,NK Rudeš,Zagreb,1957,Stadion Rudeš,2500,Supersport Prva NL,Hrvatska,2,Samir Toplak,8,6,Petar Cuic,Vezni,21,25,Hrvatska,5,6,1
+8,HNK Orijent,Rijeka,1919,Stadion Krimeja,3000,Supersport Prva NL,Hrvatska,0,Alen Šušnić,9,8,Mateo Monjac,Vezni,17,28,Hrvatska,33,8,6
+10,NK Dugopolje,Dugopolje,1952,Stadion Hrvatski vitezovi,5000,Supersport Prva NL,Hrvatska,1,Mirko Labrović,10,10,Dario Barada,Obrambeni,6,25,Hrvatska,4,4,1
+11,NK BSK Bijelo Brdo,Bijelo Brdo,1935,Stadion BSK,1500,Supersport Prva NL,Hrvatska,0,Igor Budiša,11,11,Mustedanagic Zinedin,Vezni,11,26,Bosna i Hercegovina,55,7,1
+12,NK Zrinski Osječko 1664,Osijek,1664,Stadion Gradski vrt,18000,Supersport Prva NL,Hrvatska,0,Dražen Dikonić,12,12,Gojko Gazde,Vezni,27,24,Hrvatska,6,0,1
