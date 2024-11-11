@@ -33,7 +33,6 @@ Skup podataka sadrži informacije o nogometnim klubovima i igračima koji se nat
 - **Izvor podataka**: Podaci o klubovima i igračima su sa stranice HNS-a
 
 ## Struktura datoteka
-- `klub.csv` - CSV datoteka s podacima o klubovima
-- `igrac.csv` - CSV datoteka s podacima o igračima
-- `klub.json` - JSON datoteka s podacima o klubovima
-- `igrac.json` - JSON datoteka s podacima o igračima
+- `klub.csv` - CSV datoteka s podacima o bazi
+- `klub.json` - JSON datoteka s podacima o bazi
+-
