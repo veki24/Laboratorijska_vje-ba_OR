@@ -1,0 +1,335 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Klubovi i igrači API",
+      "description": "API za upravljanje podacima o klubovima i njihovim igračima.",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/api/clubs-with-players": {
+        "get": {
+          "summary": "Dohvati sve klubove s igračima",
+          "description": "Vraća popis svih klubova s pripadajućim igračima.",
+          "responses": {
+            "200": {
+              "description": "Popis klubova s igračima",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ClubWithPlayers"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/clubs": {
+        "get": {
+          "summary": "Dohvati sve klubove",
+          "description": "Vraća popis svih klubova.",
+          "responses": {
+            "200": {
+              "description": "Popis klubova",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Club"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Dodaj novi klub",
+          "description": "Dodaje novi klub u bazu podataka.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Club"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Klub uspješno dodan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Club"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/clubs/{id}": {
+        "get": {
+          "summary": "Dohvati klub po ID-u",
+          "description": "Vraća informacije o određenom klubu s pripadajućim igračima.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID kluba",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Podaci o klubu",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ClubWithPlayers"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Klub nije pronađen"
+            }
+          }
+        },
+        "put": {
+          "summary": "Ažuriraj klub",
+          "description": "Ažurira podatke o određenom klubu.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID kluba",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Club"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Klub uspješno ažuriran",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Club"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Klub nije pronađen"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Obriši klub",
+          "description": "Briše određeni klub iz baze podataka.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID kluba",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Klub uspješno obrisan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Club"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Klub nije pronađen"
+            }
+          }
+        }
+      },
+      "/api/players": {
+        "get": {
+          "summary": "Dohvati sve igrače",
+          "description": "Vraća popis svih igrača iz baze podataka.",
+          "responses": {
+            "200": {
+              "description": "Popis igrača",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Player"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/players/{id}": {
+        "get": {
+          "summary": "Dohvati igrača po ID-u",
+          "description": "Vraća informacije o određenom igraču.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID igrača",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Podaci o igraču",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Player"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Igrač nije pronađen"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Club": {
+          "type": "object",
+          "properties": {
+            "klub_id": {
+              "type": "integer",
+              "example": 13
+            },
+            "ime_kluba": {
+              "type": "string",
+              "example": "NK Rijeka"
+            },
+            "grad": {
+              "type": "string",
+              "example": "Rijeka"
+            },
+            "osnovan": {
+              "type": "integer",
+              "example": 1946
+            },
+            "stadion": {
+              "type": "string",
+              "example": "Stadion Kantrida"
+            },
+            "kapacitet_stadiona": {
+              "type": "integer",
+              "example": 8279
+            },
+            "liga": {
+              "type": "string",
+              "example": "Prva HNL"
+            },
+            "trener": {
+              "type": "string",
+              "example": "Sergej Jakirović"
+            }
+          }
+        },
+        "Player": {
+          "type": "object",
+          "properties": {
+            "igrac_id": {
+              "type": "integer",
+              "example": 13
+            },
+            "ime_igraca": {
+              "type": "string",
+              "example": "Luka Marić"
+            },
+            "pozicija": {
+              "type": "string",
+              "example": "Obrambeni"
+            },
+            "broj_dresa": {
+              "type": "integer",
+              "example": 21
+            },
+            "godine": {
+              "type": "integer",
+              "example": 27
+            },
+            "nacionalnost": {
+              "type": "string",
+              "example": "Hrvatska"
+            },
+            "broj_golova": {
+              "type": "integer",
+              "example": 5
+            },
+            "broj_asistencija": {
+              "type": "integer",
+              "example": 1
+            },
+            "godine_u_klubu": {
+              "type": "integer",
+              "example": 2
+            }
+          }
+        },
+        "ClubWithPlayers": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Club"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "players": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Player"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  

@@ -2,65 +2,127 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataTable = document.getElementById("dataTable").getElementsByTagName("tbody")[0];
     const searchInput = document.getElementById("searchInput");
     const searchAttribute = document.getElementById("searchAttribute");
-    let filteredData = [];  // Variable to hold filtered data for downloading
+    let filteredData = []; // Variable to hold filtered data for downloading
 
-    // Učitavanje podataka iz JSON-a
-    fetch('/data/klub.json')
-        .then(response => response.json())
-        .then(data => {
-            populateTable(data);
-            setupFilter(data);
-            filteredData = data;  // Initialize filteredData with all data
-        });
+    // Učitavanje podataka iz REST API-ja za klubove i igrače
+    fetch('/api/clubs-with-players')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch data from API');
+            }
+            return response.json();
+        })
+        .then(response => {
+            if (response.status === "success") {
+                const clubs = response.data;
+                populateTable(clubs);
+                setupFilter(clubs);
+                filteredData = clubs; // Initialize filteredData with all data
+            } else {
+                console.error('Error in response:', response.message);
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
 
     // Funkcija za popunjavanje tablice
     function populateTable(data) {
-        dataTable.innerHTML = "";
-        data.forEach(item => {
-            const row = dataTable.insertRow();
-            row.insertCell().textContent = item.ime_kluba;
-            row.insertCell().textContent = item.grad;
-            row.insertCell().textContent = item.osnovan;
-            row.insertCell().textContent = item.stadion;
-            row.insertCell().textContent = item.kapacitet_stadiona;
-            row.insertCell().textContent = item.liga;
-            row.insertCell().textContent = item.trener;
-            row.insertCell().textContent = item.ime_igraca;
-            row.insertCell().textContent = item.pozicija;
-            row.insertCell().textContent = item.broj_dresa;
-            row.insertCell().textContent = item.godine;
-            row.insertCell().textContent = item.nacionalnost;
-            row.insertCell().textContent = item.broj_golova;
-            row.insertCell().textContent = item.broj_asistencija;
-            row.insertCell().textContent = item.godine_u_klubu;
+        dataTable.innerHTML = ""; // Očisti tablicu
+
+        data.forEach(club => {
+            if (club.players && club.players.length > 0) {
+                // Za svaki klub dodaj red za svakog igrača
+                club.players.forEach(player => {
+                    const row = dataTable.insertRow();
+                    row.insertCell().textContent = club.ime_kluba;
+                    row.insertCell().textContent = club.grad;
+                    row.insertCell().textContent = club.osnovan;
+                    row.insertCell().textContent = club.stadion;
+                    row.insertCell().textContent = club.kapacitet_stadiona;
+                    row.insertCell().textContent = club.liga;
+                    row.insertCell().textContent = club.trener;
+
+                    // Podaci o igraču
+                    row.insertCell().textContent = player.ime_igraca;
+                    row.insertCell().textContent = player.pozicija;
+                    row.insertCell().textContent = player.broj_dresa;
+                    row.insertCell().textContent = player.godine;
+                    row.insertCell().textContent = player.nacionalnost;
+                    row.insertCell().textContent = player.broj_golova;
+                    row.insertCell().textContent = player.broj_asistencija;
+                    row.insertCell().textContent = player.godine_u_klubu;
+                });
+            } else {
+                // Ako klub nema igrača, dodaj samo jedan red za klub
+                const row = dataTable.insertRow();
+                row.insertCell().textContent = club.ime_kluba;
+                row.insertCell().textContent = club.grad;
+                row.insertCell().textContent = club.osnovan;
+                row.insertCell().textContent = club.stadion;
+                row.insertCell().textContent = club.kapacitet_stadiona;
+                row.insertCell().textContent = club.liga;
+                row.insertCell().textContent = club.trener;
+
+                // Dodaj prazne ćelije za podatke igrača
+                for (let i = 0; i < 8; i++) {
+                    row.insertCell().textContent = "-"; // Prikazuje "-" za prazne podatke
+                }
+            }
         });
     }
 
-    // Funkcija za filtriranje podataka
     function setupFilter(data) {
-        document.getElementById("filterForm").addEventListener("submit", event => {
-            event.preventDefault();
+        // Dodajemo event listener za unos teksta u polje za pretragu
+        searchInput.addEventListener("input", () => {
             const query = searchInput.value.toLowerCase();
             const attribute = searchAttribute.value;
-
-            filteredData = data.filter(item => 
-                item[attribute].toString().toLowerCase().includes(query)
-            );
-            populateTable(filteredData);
+    
+            if (attribute === "wild") {
+                // Wild search: pretražuje sve atribute kluba i igrača
+                filteredData = data.filter(club => {
+                    // Provjera svih atributa kluba
+                    const clubMatch = Object.values(club).some(value =>
+                        value?.toString().toLowerCase().includes(query)
+                    );
+    
+                    // Provjera svih atributa svakog igrača u klubu
+                    const playerMatch = club.players?.some(player =>
+                        Object.values(player).some(value =>
+                            value?.toString().toLowerCase().includes(query)
+                        )
+                    );
+    
+                    return clubMatch || playerMatch; // Ako se podudara s bilo kojim atributom
+                });
+            } else {
+                // Standardna pretraga po odabranom atributu
+                filteredData = data.filter(club =>
+                    club[attribute]?.toString().toLowerCase().includes(query) ||
+                    club.players?.some(player =>
+                        player[attribute]?.toString().toLowerCase().includes(query)
+                    )
+                );
+            }
+    
+            populateTable(filteredData); // Ažuriraj tablicu s filtriranim podacima
+        });
+    
+        // Također ažuriramo pretragu kada se promijeni odabrani atribut
+        searchAttribute.addEventListener("change", () => {
+            searchInput.dispatchEvent(new Event("input")); // Ponovo pokrećemo pretragu
         });
     }
+    
 
     // Function to convert data to CSV format
     function convertToCSV(data) {
         let csvContent = "data:text/csv;charset=utf-8,";
-        csvContent += "Naziv kluba,Grad,Osnovan,Stadion,Kapacitet stadiona,Liga,Trener,Ime igrača,Pozicija,Broj dresa,Godine,Nacionalnost,Broj golova,Broj asistencija,Godine u klubu\n";
+        csvContent += "Naziv kluba,Grad,Osnovan,Stadion,Kapacitet stadiona,Liga,Trener,Igrači\n";
 
-        data.forEach(item => {
+        data.forEach(club => {
             const row = [
-                item.ime_kluba, item.grad, item.osnovan, item.stadion,
-                item.kapacitet_stadiona, item.liga, item.trener, item.ime_igraca,
-                item.pozicija, item.broj_dresa, item.godine, item.nacionalnost,
-                item.broj_golova, item.broj_asistencija, item.godine_u_klubu
+                club.ime_kluba, club.grad, club.osnovan, club.stadion,
+                club.kapacitet_stadiona, club.liga, club.trener,
+                club.players ? club.players.map(player => `${player.ime_igraca} (${player.pozicija})`).join(", ") : "Nema igrača"
             ];
             csvContent += row.join(",") + "\r\n";
         });
