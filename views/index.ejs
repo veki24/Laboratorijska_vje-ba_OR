@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Otvoreni skup podataka: Klubovi i igrači Supersport Prve NL">
+    <meta name="author" content="Vedran Marković">
+    <meta name="keywords" content="otvoreni podaci, klub, igrači">
+    <title>Otvoreni podaci: Klub i igrači</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Otvoreni podaci: Klubovi i igrači Supersport Prve NL</h1>
+    </header>
+    <main>
+        <p>Dobrodošli na stranicu s otvorenim podacima o klubovima i igračima Supersport Prve NL. Ovdje možete pregledavati, preuzimati i filtrirati podatke.</p>
+        
+        <!-- Conditional navigation based on authentication -->
+        <section>
+            <h2>Navigacija</h2>
+            <% if (isAuthenticated) { %>
+                <p>Prijavljeni ste kao <strong><%= user.name || user.nickname || 'Korisnik' %></strong>.</p>
+                <ul>
+                    <li><a href="/profile">Pregledaj profil</a></li>
+                    <li><a href="/api/clubs-jsonld">Osvježi bazu podataka</a></li>
+                    <li><a href="/logout">Odjava</a></li>
+                </ul>
+            <% } else { %>
+                <p>Niste prijavljeni. Molimo prijavite se kako biste pristupili dodatnim funkcijama.</p>
+                <a href="/login">Prijava</a>
+            <% } %>
+        </section>
+
+        <section>
+            <h2>Dostupni podaci</h2>
+            <p>Podaci su dostupni u sljedećim formatima:</p>
+            <ul>
+                <li><a href="/data/klub.json" download="klub.json">Preuzmi JSON</a></li>
+                <li><a href="/data/klub.csv" download="klub.csv">Preuzmi CSV</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Pregled tablice</h2>
+            <p>Pregledajte podatke u interaktivnoj tablici:</p>
+            <a href="/datatable.html">Otvori tablicu</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Vedran Marković. Sva prava pridržana.</p>
+    </footer>
+</body>
+</html>
